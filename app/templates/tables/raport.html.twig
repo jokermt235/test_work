@@ -1,0 +1,21 @@
+<table class="uk-table uk-table-divider">
+    <thead>
+        <tr>
+            {% for head in heads %}
+                <th class="uk-text-center">{{ head|e }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for key,value in raports %}
+        <tr>
+            <td>{{value.id}}</td>
+            <td>{{value.name}}</td>
+            <td>{{value.godzina}}</td>
+            <td>{{value.usytkovnik}}</td>
+            <td>{{value.lokal}}</td>
+            <td>{{value.data | date('Y-m-d')}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

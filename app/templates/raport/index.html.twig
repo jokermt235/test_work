@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Raport{% endblock %}
+
+{% block body %}
+<form class="uk-position-relative">
+    <input id="lokal_value" value="{{app.request.get('lokal')}}">
+    <input id="od_value" value="{{app.request.get('od')}}">
+    <input id="do_value" value="{{app.request.get('do')}}">
+    <div class="uk-card uk-card-default uk-card-body uk-margin-large-top uk-margin-large-left uk-margin-large-right">
+        <div class="uk-text-center" uk-grid>
+            <div class="uk-width-1-4@s uk-position-relative">
+                <div>
+                    <div uk-form-custom="target: > * > span:first-child">
+                        <select name="lokal" id="lokal">
+                            <option value="">Source</option>
+                            <option value="Lokal 01">Lokal 01</option>
+                            <option value="Lokal 02">Lokal 02</option>
+                            <option value="Lokal 03">Lokal 03</option>
+                            <option value="Lokal 04">Lokal 04</option>
+                            <option value="Lokal 05">Lokal 05</option>
+                        </select>
+                        <button class="uk-button uk-button-default uk-text-left" type="button" tabindex="-1" style="width:196px">
+                            <span></span>
+                            <span uk-icon="icon: chevron-down"></span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div uk-form-custom="target: > * > span:first-child">
+                        <select name="od" id="od">
+                            <option value="">OD</option>
+                            <option value="2022-03-04">2022-03-04</option>
+                            <option value="2022-03-05">2022-03-05</option>
+                            <option value="2022-03-07">2022-03-07</option>
+                            <option value="2022-03-02">2022-03-02</option>
+                            <option value="2022-03-08">2022-03-08</option>
+                        </select>
+                        <button class="uk-button uk-button-default uk-text-left" type="button" tabindex="-1" style="width:196px">
+                            <span></span>
+                            <span uk-icon="icon: chevron-down"></span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div uk-form-custom="target: > * > span:first-child">
+                        <select name="do" id="do">
+                            <option value="">DO</option>
+                            <option value="2022-03-04">2022-03-04</option>
+                            <option value="2022-03-05">2022-03-05</option>
+                            <option value="2022-03-07">2022-03-07</option>
+                            <option value="2022-03-02">2022-03-02</option>
+                            <option value="2022-03-08">2022-03-08</option>
+                        </select>
+                        <button class="uk-button uk-button-default uk-text-left" type="button" tabindex="-1" style="width:196px">
+                            <span></span>
+                            <span uk-icon="icon: chevron-down"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="uk-margin-large-top">
+                    <button class="uk-button uk-button-primary" style="width:196px">Confirm</button>
+                </div>
+            </div>
+            <div class="uk-width-expand@s">
+                {{ include('tables/raport.html.twig', {heads: headers, raports : dataset}, with_context = false) }}
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    let lokal = document.getElementById("lokal");
+    let od  = document.getElementById("od");
+    let _do  = document.getElementById("do");
+
+    let lokal_value = document.getElementById("lokal_value");
+    let od_value  = document.getElementById("od");
+    let _do_value = document.getElementById("do");
+</script>
+{% endblock %}

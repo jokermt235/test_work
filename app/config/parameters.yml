@@ -1,0 +1,7 @@
+parameters:
+    psql_database_driver: pdo_pgsql
+    psql_database_host: postgres
+    psql_database_port: 5432
+    psql_database_name: symfony
+    psql_database_user: postgres
+    psql_database_password: postgres

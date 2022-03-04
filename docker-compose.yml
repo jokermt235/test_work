@@ -1,0 +1,54 @@
+version: '3.1'
+services:
+  php-fpm:
+    build: ./php-fpm
+    volumes:
+      - ./app:/var/www/test_work
+      - ./assets/test_data.json:/var/www/test_data.json
+    depends_on:
+      - postgres
+
+  web:
+    image: nginx:latest
+    ports:
+      - "8888:80"
+    volumes:
+      - ./app:/var/www/test_work
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-fpm
+    
+  postgres:
+    image: postgres:9.6
+    ports:
+      - '5432:5432'
+    container_name: 'postgres'
+    working_dir: /app
+    restart: always
+    environment:
+      POSTGRES_DB: 'symfony_db'
+      POSTGRES_USER: 'postres'
+      POSTGRES_PASSWORD: 'postgres'
+    volumes:
+      - ./data/dump:/app/dump
+      - ./data/postgresql:/var/lib/postgresql/data
+  
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - ./app:/var/www
+    depends_on:
+      - web
+
+  command:
+    build: .
+    command: 
+      - /bin/sh 
+      - -c 
+      - |
+        ls -la /var/www
+    volumes:
+      - ./app:/var/www
+    depends_on:
+      - php-fpm
